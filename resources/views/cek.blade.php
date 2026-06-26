@@ -41,10 +41,13 @@
             </div>
         </header>
 
-        <form method="GET" action="{{ route('cek') }}" class="date-filter-form monitor-date-filter">
-            <label for="tanggal">Tanggal Sidang</label>
-            <input type="date" id="tanggal" name="tanggal" value="{{ $dateStr }}" onchange="this.form.submit()" class="date-picker-input">
-        </form>
+        <div class="monitor-toolbar">
+            <a href="{{ route('home') }}" class="monitor-home-link">← Beranda</a>
+            <form method="GET" action="{{ route('cek') }}" class="date-filter-form monitor-date-filter">
+                <label for="tanggal">Tanggal Sidang</label>
+                <input type="date" id="tanggal" name="tanggal" value="{{ $dateStr }}" onchange="this.form.submit()" class="date-picker-input">
+            </form>
+        </div>
 
         @if($jadwalSidangs->isEmpty())
             <div class="empty-sidang-card monitor-empty">
