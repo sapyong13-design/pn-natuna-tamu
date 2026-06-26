@@ -404,7 +404,7 @@ body {
     color: #1e3a8a;
 }
 .sidang-info strong { font-size: 1.05rem; }
-.sidang-info span { color: #475569; line-height: 1.5; }
+.hero-card .sidang-info span { color: #475569; line-height: 1.5; }
 
 .submit-button {
     width: 100%;
@@ -1230,193 +1230,409 @@ body::before {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+
 /* Monitoring Cek Tamu Page */
+.monitor-refresh-bar {
+    position: fixed;
+    inset: 0 auto auto 0;
+    z-index: 80;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #fbbf24, #34d399, #38bdf8);
+    transform-origin: left center;
+    animation: monitor-refresh-progress 300s linear forwards;
+    box-shadow: 0 0 18px rgba(52, 211, 153, 0.45);
+}
+
+@keyframes monitor-refresh-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
 .date-picker-input {
     background: rgba(255, 255, 255, 0.14) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
     border-radius: 999px;
     color: white !important;
     padding: 8px 18px;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.9rem;
     outline: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
     display: inline-block;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 .date-picker-input:hover,
 .date-picker-input:focus {
     background: rgba(255, 255, 255, 0.24) !important;
     border-color: rgba(255, 255, 255, 0.45) !important;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.18);
 }
+
 .date-picker-input::-webkit-calendar-picker-indicator {
     filter: invert(1);
     cursor: pointer;
 }
 
+.monitor-container,
 .cek-container {
-    max-width: 960px;
-    margin: 110px auto 40px; /* Pushed down to clear the header logos on desktop */
+    width: min(1760px, calc(100% - 48px));
+    max-width: none;
+    margin: 118px auto 42px;
     padding-bottom: 40px;
 }
 
-.cek-title {
-    text-align: center;
-    color: #ffffff;
-    font-size: clamp(1.6rem, 3.8vw, 2.3rem);
-    font-weight: 950;
-    margin-bottom: 24px;
-    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-    line-height: 1.2;
+.monitor-hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
 }
 
-.sidang-card {
-    background: linear-gradient(135deg, rgba(4, 47, 38, 0.94), rgba(6, 95, 70, 0.88)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(2, 44, 34, 0.35);
-    padding: 24px;
-    margin-bottom: 24px;
-    backdrop-filter: blur(8px);
+.monitor-kicker {
+    margin: 0 0 8px;
+    color: #fbbf24;
+    font-size: clamp(0.82rem, 0.8vw, 1rem);
+    font-weight: 950;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.32);
+}
+
+.cek-title,
+.monitor-title {
+    margin: 0;
+    font-size: clamp(2.15rem, 3vw, 4.4rem);
+    font-weight: 950;
     color: #ffffff;
     text-align: left;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
 }
 
-.sidang-header {
+.monitor-date {
+    margin: 10px 0 0;
+    color: #a7f3d0;
+    font-size: clamp(1rem, 1vw, 1.25rem);
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.monitor-summary {
+    min-width: 132px;
+    padding: 14px 20px;
+    text-align: center;
+    color: #ecfdf5;
+    background: linear-gradient(135deg, rgba(6, 78, 59, 0.92), rgba(4, 120, 87, 0.82));
+    border: 1px solid rgba(167, 243, 208, 0.22);
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(2, 44, 34, 0.24);
+}
+
+.monitor-summary strong {
+    display: block;
+    font-size: clamp(2rem, 3vw, 3.5rem);
+    line-height: 0.95;
+    color: #fbbf24;
+}
+
+.monitor-summary span {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.monitor-date-filter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 20px;
+}
+
+.monitor-date-filter label {
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 800;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+.sidang-monitor-grid {
+    display: grid;
+    gap: 22px;
+}
+
+.sidang-monitor-grid.single {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.sidang-monitor-grid.multi {
+    grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+    align-items: stretch;
+}
+
+.sidang-card,
+.monitor-sidang-card {
+    background: linear-gradient(135deg, rgba(3, 45, 37, 0.97), rgba(6, 95, 70, 0.92)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 28px;
+    box-shadow: 0 14px 34px rgba(2, 44, 34, 0.30);
+    padding: clamp(20px, 2vw, 32px);
+    margin-bottom: 0;
+    color: #ffffff;
+    text-align: left;
+    contain: paint;
+}
+
+.sidang-monitor-grid.single .monitor-sidang-card {
+    min-height: min(620px, calc(100vh - 270px));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidang-header,
+.monitor-sidang-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    padding-bottom: 16px;
     margin-bottom: 20px;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 14px;
+}
+
+.sidang-info {
+    flex: 1 1 620px;
+    min-width: 0;
+}
+
+.sidang-title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .sidang-no-perkara {
-    font-size: 1.35rem;
+    font-size: clamp(1.55rem, 2.6vw, 3.5rem);
     font-weight: 950;
-    color: #f59e0b;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    color: #fbbf24 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+}
+
+.sidang-monitor-grid.multi .sidang-no-perkara {
+    font-size: clamp(1.35rem, 1.6vw, 2rem);
+}
+
+.sidang-jenis-perkara {
+    font-weight: 900;
+    color: #fbbf24 !important;
+    background: rgba(245, 158, 11, 0.18);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: clamp(0.78rem, 0.9vw, 1rem);
+    border: 1px solid rgba(245, 158, 11, 0.34);
+    white-space: nowrap;
 }
 
 .sidang-meta {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: flex-end;
+    flex: 0 0 auto;
+    margin-left: auto;
 }
 
 .sidang-badge {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 6px 12px;
-    border-radius: 10px;
-    font-size: 0.8rem;
-    font-weight: 800;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 8px 13px;
+    border-radius: 999px;
+    font-size: clamp(0.78rem, 0.86vw, 0.98rem);
+    font-weight: 900;
+    color: #f8fafc;
 }
 
 .sidang-badge.ruang {
-    background: rgba(16, 185, 129, 0.2);
-    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.22);
+    border-color: rgba(16, 185, 129, 0.34);
     color: #a7f3d0;
 }
 
-.sidang-badge.jam {
-    background: rgba(245, 158, 11, 0.2);
-    border-color: rgba(245, 158, 11, 0.3);
-    color: #fef08a;
+.sidang-badge.hadir {
+    background: rgba(34, 197, 94, 0.18);
+    border-color: rgba(34, 197, 94, 0.32);
+    color: #bbf7d0;
 }
 
-.sidang-agenda {
-    font-size: 0.95rem;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.85);
-    margin-top: 4px;
-}
-
-.tamu-grid {
+.sidang-main-info {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.sidang-monitor-grid.multi .sidang-main-info {
+    grid-template-columns: 1fr;
+}
+
+.sidang-pihak-panel,
+.sidang-agenda-panel {
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.075);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 18px;
+}
+
+.sidang-section-label {
+    margin-bottom: 8px;
+    color: #a7f3d0;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.sidang-pihak-list {
+    display: grid;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: clamp(0.98rem, 1.25vw, 1.45rem);
+    font-weight: 780;
+    line-height: 1.36;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+}
+
+.sidang-monitor-grid.multi .sidang-pihak-list {
+    font-size: 0.98rem;
+}
+
+.sidang-pihak-row {
+    display: block;
+    color: #f8fafc;
+    overflow-wrap: anywhere;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.24);
+}
+
+.sidang-agenda-panel p {
+    margin: 0;
+    color: #fef3c7;
+    font-size: clamp(1rem, 1.15vw, 1.35rem);
+    font-weight: 850;
+    line-height: 1.42;
+}
+
+.sidang-monitor-grid.multi .sidang-agenda-panel p {
+    font-size: 0.98rem;
+}
+
+.tamu-grid,
+.monitor-tamu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
 }
 
-@media (max-width: 1024px) {
-    .tamu-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 580px) {
-    .tamu-grid {
-        grid-template-columns: 1fr;
-    }
+.sidang-monitor-grid.multi .monitor-tamu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .tamu-role-column {
     background: rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    border-radius: 18px;
     padding: 14px;
     display: flex;
     flex-direction: column;
+    min-width: 0;
+}
+
+.tamu-role-column.is-present {
+    background: rgba(16, 185, 129, 0.10);
+    border-color: rgba(52, 211, 153, 0.24);
+}
+
+.tamu-role-column.is-absent {
+    background: rgba(127, 29, 29, 0.13);
+    border-color: rgba(248, 113, 113, 0.20);
 }
 
 .tamu-role-header {
-    font-size: 0.82rem;
-    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: clamp(0.78rem, 0.86vw, 0.98rem);
+    font-weight: 950;
     color: #f3f4f6;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 6px;
+    padding-bottom: 8px;
     margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
-.guest-present-item {
+.tamu-role-header b {
+    color: #bbf7d0;
+    font-size: 0.72rem;
+    white-space: nowrap;
+}
+
+.guest-present-item,
+.guest-absent-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #34d399;
-    background: rgba(52, 211, 153, 0.08);
-    border: 1px solid rgba(52, 211, 153, 0.2);
-    padding: 6px 10px;
-    border-radius: 10px;
-    margin-bottom: 8px;
+    gap: 8px;
+    font-size: clamp(0.82rem, 0.9vw, 1.02rem);
+    font-weight: 800;
+    padding: 8px 10px;
+    border-radius: 12px;
     word-break: break-word;
+    contain: paint;
+}
+
+.guest-present-item {
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.09);
+    border: 1px solid rgba(52, 211, 153, 0.22);
+    margin-bottom: 8px;
 }
 
 .guest-present-item small {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.66);
     display: block;
 }
 
 .guest-absent-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #f87171;
-    background: rgba(248, 113, 113, 0.08);
-    border: 1px solid rgba(248, 113, 113, 0.2);
-    padding: 6px 10px;
-    border-radius: 10px;
+    color: #fecaca;
+    background: rgba(248, 113, 113, 0.10);
+    border: 1px solid rgba(248, 113, 113, 0.22);
 }
 
 .badge-status {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 900;
+    font-size: 0.72rem;
+    font-weight: 950;
     flex-shrink: 0;
 }
 
@@ -1430,16 +1646,554 @@ body::before {
     color: #ffffff;
 }
 
-.empty-sidang-card {
+.empty-sidang-card,
+.monitor-empty {
     text-align: center;
-    padding: 40px;
-    background: rgba(2, 44, 34, 0.45) !important;
+    padding: 44px;
+    background: rgba(2, 44, 34, 0.62) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 24px;
+    border-radius: 28px;
     color: #ffffff;
+}
+
+.monitor-empty h3 {
+    margin: 0 0 8px;
+    font-size: 1.45rem;
+    font-weight: 950;
+}
+
+.monitor-empty p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.72);
 }
 
 .empty-icon {
     font-size: 3rem;
     margin-bottom: 12px;
+}
+
+.monitor-clock em {
+    display: block;
+    margin-top: 4px;
+    color: #bbf7d0;
+    font-size: 0.68rem;
+    font-style: normal;
+    font-weight: 850;
+    letter-spacing: 0.02em;
+}
+
+.monitor-clock em.is-offline {
+    color: #fecaca;
+}
+
+@media (max-width: 1200px) {
+    .monitor-container,
+    .cek-container {
+        width: min(1040px, calc(100% - 28px));
+        margin: 20px auto 40px !important;
+    }
+
+    .monitor-hero,
+    .sidang-main-info {
+        grid-template-columns: 1fr;
+    }
+
+    .monitor-hero {
+        align-items: stretch;
+    }
+
+    .monitor-summary {
+        width: fit-content;
+    }
+}
+
+@media (max-width: 900px) {
+    .sidang-monitor-grid.multi,
+    .tamu-grid,
+    .monitor-tamu-grid,
+    .sidang-monitor-grid.multi .monitor-tamu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidang-meta {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .monitor-refresh-bar {
+        animation: none;
+        transform: scaleX(1);
+    }
+}
+
+/* Monitor display polish */
+.monitor-sidang-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.monitor-sidang-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 12% 0%, rgba(251, 191, 36, 0.10), transparent 30rem),
+        radial-gradient(circle at 88% 12%, rgba(52, 211, 153, 0.12), transparent 28rem);
+    opacity: 0.9;
+}
+
+.monitor-sidang-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.monitor-sidang-header {
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.sidang-title-row {
+    align-items: center;
+}
+
+.sidang-main-info {
+    align-items: stretch;
+}
+
+.sidang-pihak-panel,
+.sidang-agenda-panel {
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidang-agenda-panel {
+    border-left: 4px solid rgba(251, 191, 36, 0.72);
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.10), rgba(255, 255, 255, 0.07));
+}
+
+.sidang-pihak-list {
+    gap: 8px;
+}
+
+.sidang-pihak-row {
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+.tamu-role-header {
+    min-height: 34px;
+    line-height: 1.15;
+}
+
+.tamu-role-header span {
+    min-width: 0;
+    overflow-wrap: normal;
+}
+
+.tamu-role-header b {
+    flex: 0 0 auto;
+}
+
+.role-para-pihak {
+    border-top: 3px solid rgba(52, 211, 153, 0.74);
+}
+
+.role-saksi {
+    border-top: 3px solid rgba(251, 191, 36, 0.72);
+}
+
+.role-ahli {
+    border-top: 3px solid rgba(167, 139, 250, 0.74);
+}
+
+.role-pengunjung {
+    border-top: 3px solid rgba(56, 189, 248, 0.74);
+}
+
+.role-para-pihak .tamu-role-header span { color: #bbf7d0; }
+.role-saksi .tamu-role-header span { color: #fde68a; }
+.role-ahli .tamu-role-header span { color: #ddd6fe; }
+.role-pengunjung .tamu-role-header span { color: #bae6fd; }
+
+.guest-absent-item {
+    color: #fed7aa;
+    background: rgba(251, 146, 60, 0.10);
+    border-color: rgba(251, 146, 60, 0.24);
+}
+
+.badge-status.absent {
+    background: #f97316;
+    color: #fff7ed;
+}
+
+.monitor-clock em {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.online-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #22c55e;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
+    animation: online-pulse 2.4s ease-out infinite;
+}
+
+.monitor-clock em.is-offline .online-pulse {
+    background: #f97316;
+    box-shadow: none;
+    animation: none;
+}
+
+@keyframes online-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+    70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+@media (max-width: 900px) {
+    .sidang-pihak-panel,
+    .sidang-agenda-panel {
+        min-height: auto;
+    }
+}
+
+/* Monitor alignment refinement */
+.monitor-sidang-header {
+    display: block;
+}
+
+.monitor-sidang-header .sidang-info {
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.monitor-sidang-header .sidang-title-row {
+    width: 100%;
+    gap: 12px;
+}
+
+.monitor-sidang-header .sidang-badge.ruang {
+    margin-left: auto;
+}
+
+.sidang-badge.hadir {
+    display: none;
+}
+
+.tamu-role-header {
+    justify-content: flex-start;
+    min-height: 38px;
+}
+
+.tamu-role-header span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 26px;
+    line-height: 1.1;
+}
+
+.tamu-role-header b {
+    display: none;
+}
+
+.role-para-pihak .tamu-role-header span,
+.role-saksi .tamu-role-header span,
+.role-ahli .tamu-role-header span,
+.role-pengunjung .tamu-role-header span {
+    max-width: 100%;
+}
+
+@media (max-width: 900px) {
+    .monitor-sidang-header .sidang-badge.ruang {
+        margin-left: 0;
+    }
+}
+
+/* Status absent refinement */
+.guest-absent-item {
+    color: #fecaca;
+    background: rgba(239, 68, 68, 0.11);
+    border-color: rgba(248, 113, 113, 0.30);
+}
+
+.badge-status.absent {
+    position: relative;
+    background: #ef4444;
+    color: transparent;
+    font-size: 0;
+}
+
+.badge-status.absent::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 8px;
+    height: 2px;
+    border-radius: 999px;
+    background: #ffffff;
+    transform: translate(-50%, -50%);
+}
+
+/* Role icon readability */
+.tamu-role-header span {
+    font-size: clamp(0.9rem, 0.95vw, 1.08rem);
+    letter-spacing: 0.045em;
+}
+
+.sidang-monitor-grid.single .tamu-role-header span {
+    font-size: clamp(0.96rem, 1vw, 1.14rem);
+}
+
+@media (min-width: 1201px) {
+    .tamu-role-header {
+        padding-bottom: 10px;
+    }
+}
+
+/* Monitor clock typography alignment */
+.monitor-clock,
+.datetime-card.monitor-clock {
+    min-width: 260px;
+    padding: 12px 16px;
+    text-align: right;
+}
+
+.monitor-clock span,
+.datetime-card.monitor-clock span {
+    display: block;
+    margin-bottom: 3px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.88rem;
+    font-weight: 950;
+    letter-spacing: 0.075em;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.monitor-clock b,
+.datetime-card.monitor-clock b {
+    display: block;
+    color: #fbbf24;
+    font-size: clamp(1.65rem, 2.1vw, 2.25rem);
+    font-variant-numeric: tabular-nums;
+    font-weight: 950;
+    letter-spacing: 0.015em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.monitor-clock em,
+.datetime-card.monitor-clock em {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    width: 100%;
+    margin-top: 7px;
+    color: #bbf7d0;
+    font-size: 0.78rem;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+    .monitor-clock,
+    .datetime-card.monitor-clock {
+        min-width: 0;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .monitor-clock em,
+    .datetime-card.monitor-clock em {
+        justify-content: center;
+    }
+}
+
+/* Transparent monitor clock */
+.monitor-clock,
+.datetime-card.monitor-clock {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+}
+
+.monitor-clock span,
+.datetime-card.monitor-clock span,
+.monitor-clock b,
+.datetime-card.monitor-clock b,
+.monitor-clock em,
+.datetime-card.monitor-clock em {
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* Fully remove clock glass panel */
+.landing-corner-right.monitor-clock-wrap,
+.landing-corner-right.monitor-clock-wrap .datetime-card,
+.landing-corner-right.monitor-clock-wrap .monitor-clock,
+.landing-corner-right.monitor-clock-wrap .datetime-card::before,
+.landing-corner-right.monitor-clock-wrap .datetime-card::after {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+}
+
+.landing-corner-right.monitor-clock-wrap .datetime-card::before,
+.landing-corner-right.monitor-clock-wrap .datetime-card::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Absolute final reset for monitor clock panel */
+body .landing-corner-right.monitor-clock-wrap,
+body .landing-corner-right.monitor-clock-wrap .datetime-card,
+body .landing-corner-right.monitor-clock-wrap .datetime-card.monitor-clock,
+body .landing-corner-right.monitor-clock-wrap #current-date-text,
+body .landing-corner-right.monitor-clock-wrap #current-time,
+body .landing-corner-right.monitor-clock-wrap #connection-status {
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+}
+
+body .landing-corner-right.monitor-clock-wrap .datetime-card,
+body .landing-corner-right.monitor-clock-wrap .datetime-card.monitor-clock {
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+}
+
+body .landing-corner-right.monitor-clock-wrap::before,
+body .landing-corner-right.monitor-clock-wrap::after,
+body .landing-corner-right.monitor-clock-wrap .datetime-card::before,
+body .landing-corner-right.monitor-clock-wrap .datetime-card::after,
+body .landing-corner-right.monitor-clock-wrap .datetime-card.monitor-clock::before,
+body .landing-corner-right.monitor-clock-wrap .datetime-card.monitor-clock::after {
+    content: none !important;
+    display: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Pure text clock for monitor page */
+.monitor-clock-text {
+    min-width: 260px;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+    color: #ffffff;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.monitor-clock-text span {
+    display: block;
+    margin: 0 0 4px;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.88rem;
+    font-weight: 950;
+    letter-spacing: 0.075em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.48);
+}
+
+.monitor-clock-text b {
+    display: block;
+    margin: 0;
+    color: #fbbf24;
+    font-size: clamp(1.65rem, 2.1vw, 2.25rem);
+    font-variant-numeric: tabular-nums;
+    font-weight: 950;
+    letter-spacing: 0.015em;
+    line-height: 1;
+    white-space: nowrap;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.48);
+}
+
+.monitor-clock-text em {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    width: 100%;
+    margin-top: 7px;
+    color: #bbf7d0;
+    font-size: 0.78rem;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    white-space: nowrap;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.48);
+}
+
+.monitor-clock-text em.is-offline {
+    color: #fecaca;
+}
+
+.monitor-clock-text em.is-offline .online-pulse {
+    background: #f97316;
+    box-shadow: none;
+    animation: none;
+}
+
+@media (max-width: 1200px) {
+    .monitor-clock-text {
+        min-width: 0;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        align-items: center;
+    }
+
+    .monitor-clock-text em {
+        justify-content: center;
+    }
 }
