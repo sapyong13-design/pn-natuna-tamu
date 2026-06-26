@@ -189,3 +189,61 @@ Scheduler menjalankan sinkronisasi setiap hari pukul 06:00 jika cron cPanel Lara
 - Admin wajib login via Filament.
 - Data tamu tidak ditampilkan publik.
 - Link survey disimpan di database, bukan hardcode.
+## Update Server via Git
+
+Deployment ke `tamu.pn-natuna.go.id` sudah berhasil dan repository GitHub sudah public:
+
+```text
+https://github.com/sapyong13-design/pn-natuna-tamu
+```
+
+Untuk update berikutnya dari server cPanel/IDwebhost, jalankan:
+
+```bash
+cd /home/pnnatuna/pn-natuna-tamu
+git pull origin master
+/opt/cpanel/ea-php84/root/usr/bin/php artisan view:clear
+/opt/cpanel/ea-php84/root/usr/bin/php artisan cache:clear
+/opt/cpanel/ea-php84/root/usr/bin/php artisan config:clear
+/opt/cpanel/ea-php84/root/usr/bin/php artisan config:cache
+/opt/cpanel/ea-php84/root/usr/bin/php artisan route:cache
+/opt/cpanel/ea-php84/root/usr/bin/php artisan view:cache
+```
+
+Jika update hanya CSS/UI dan folder `public/build` sudah ikut ter-commit, server cukup `git pull origin master` lalu clear cache Laravel. Tidak perlu menjalankan `npm run build` di server.
+
+Jika ada migration baru, jalankan:
+
+```bash
+/opt/cpanel/ea-php84/root/usr/bin/php artisan migrate --force
+```
+
+Jangan menjalankan perintah berikut di production:
+
+```bash
+php artisan migrate:fresh
+```
+
+`migrate:fresh` akan menghapus tabel dan data database. Update via `git pull` aman untuk database selama file `.env` production tetap dipertahankan dan tidak menjalankan perintah reset database.
+
+### Jika folder server belum menjadi repo Git
+
+Jika muncul error:
+
+```text
+fatal: not a git repository (or any of the parent directories): .git
+```
+
+Artinya folder server belum punya metadata Git. Solusi aman adalah backup folder lama, clone repo, lalu copy `.env` production dari backup:
+
+```bash
+cd /home/pnnatuna
+mv pn-natuna-tamu pn-natuna-tamu-backup-$(date +%Y%m%d-%H%M)
+git clone https://github.com/sapyong13-design/pn-natuna-tamu.git pn-natuna-tamu
+cp pn-natuna-tamu-backup-*/.env pn-natuna-tamu/.env
+cd pn-natuna-tamu
+/opt/cpanel/ea-php84/root/usr/bin/php $(which composer) install --no-dev --optimize-autoloader
+```
+
+Setelah itu jalankan cache Laravel seperti bagian update server di atas.
+
