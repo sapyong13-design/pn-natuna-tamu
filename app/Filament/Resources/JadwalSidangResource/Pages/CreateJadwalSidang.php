@@ -1,0 +1,2 @@
+<?php
+namespace App\Filament\Resources\JadwalSidangResource\Pages; use App\Filament\Resources\JadwalSidangResource; use Filament\Resources\Pages\CreateRecord; class CreateJadwalSidang extends CreateRecord { protected static string $resource=JadwalSidangResource::class; }

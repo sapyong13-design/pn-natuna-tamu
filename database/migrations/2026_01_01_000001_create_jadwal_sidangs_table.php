@@ -1,0 +1,3 @@
+<?php
+use Illuminate\Database\Migrations\Migration; use Illuminate\Database\Schema\Blueprint; use Illuminate\Support\Facades\Schema;
+return new class extends Migration { public function up(): void { Schema::create('jadwal_sidangs', function (Blueprint $table) { $table->id(); $table->date('tanggal_sidang'); $table->time('jam_sidang')->nullable(); $table->string('nomor_perkara'); $table->text('para_pihak')->nullable(); $table->string('agenda_sidang')->nullable(); $table->string('ruang_sidang')->nullable(); $table->string('majelis_hakim')->nullable(); $table->string('sumber_data')->nullable(); $table->timestamps(); $table->index(['tanggal_sidang','nomor_perkara']); }); } public function down(): void { Schema::dropIfExists('jadwal_sidangs'); } };
