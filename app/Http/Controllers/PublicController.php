@@ -21,7 +21,12 @@ class PublicController extends Controller
         $jadwalSidangs = Cache::remember('jadwal_sidang_hari_ini', 300, function () {
             return JadwalSidang::whereDate('tanggal_sidang', today())->orderBy('jam_sidang')->get();
         });
-        return view('buku-tamu.form', compact('jadwalSidangs'));
+
+        $captchaLeft = random_int(1, 9);
+        $captchaRight = random_int(1, 9);
+        session(['guest_captcha_answer' => $captchaLeft + $captchaRight]);
+
+        return view('buku-tamu.form', compact('jadwalSidangs', 'captchaLeft', 'captchaRight'));
     }
 
     public function store(StoreGuestRequest $request)
@@ -39,8 +44,11 @@ class PublicController extends Controller
             $data['ruang_sidang'] = $j->ruang_sidang;
             $data['jam_sidang'] = $j->jam_sidang;
         }
+        unset($data['captcha']);
 
         $guest = Guest::create($data);
+        $request->session()->forget('guest_captcha_answer');
+
         return redirect()->route('buku-tamu.selesai', $guest->kode_kunjungan);
     }
 

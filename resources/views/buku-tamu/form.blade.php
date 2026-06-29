@@ -136,6 +136,15 @@
                     <textarea name="keperluan" rows="3" placeholder="Tuliskan keperluan kunjungan bila ada">{{ old('keperluan') }}</textarea>
                     @error('keperluan')<small>{{ $message }}</small>@enderror
                 </label>
+
+                <label class="field captcha-field">
+                    <span>Verifikasi <b>*</b></span>
+                    <div class="captcha-box">
+                        <strong>{{ $captchaLeft }} + {{ $captchaRight }} =</strong>
+                        <input name="captcha" value="{{ old('captcha') }}" required inputmode="numeric" autocomplete="off" placeholder="Jawaban">
+                    </div>
+                    @error('captcha')<small>{{ $message }}</small>@enderror
+                </label>
             </div>
 
             <button class="submit-button" type="submit">

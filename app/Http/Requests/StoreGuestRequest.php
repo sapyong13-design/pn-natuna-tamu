@@ -26,6 +26,22 @@ class StoreGuestRequest extends FormRequest
             'jadwal_sidang_id' => ['nullable', 'required_if:jenis_layanan,Menghadiri Sidang', 'exists:jadwal_sidangs,id'],
             'peran_sidang' => ['nullable', 'required_if:jenis_layanan,Menghadiri Sidang', Rule::in(Guest::PERAN_SIDANG)],
             'keterangan' => ['nullable', 'string', 'max:1000'],
+            'captcha' => [
+                'required',
+                'integer',
+                function (string $attribute, mixed $value, \Closure $fail): void {
+                    if ((int) $value !== (int) session('guest_captcha_answer')) {
+                        $fail('Jawaban verifikasi salah. Silakan hitung kembali.');
+                    }
+                },
+            ],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'captcha' => 'verifikasi',
         ];
     }
 }
