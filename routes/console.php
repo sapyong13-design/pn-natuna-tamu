@@ -8,4 +8,4 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('sipp:sync-jadwal')->dailyAt('06:00')->withoutOverlapping();
+Schedule::command('sipp:sync-jadwal')->hourly()->withoutOverlapping();
