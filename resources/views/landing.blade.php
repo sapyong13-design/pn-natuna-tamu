@@ -12,7 +12,7 @@
         <div class="form-corner-berakhlak">
             <img src="{{ asset('images/berakhlak-bangga.png') }}" alt="BerAKHLAK Bangga Melayani Bangsa">
         </div>
-        <div class="datetime-card" aria-label="Tanggal dan jam sekarang">
+        <div class="datetime-card monitor-clock-text" aria-label="Tanggal dan jam sekarang">
             <span id="current-date-text">Hari, Tanggal</span>
             <b id="current-time">00:00:00 WIB</b>
         </div>

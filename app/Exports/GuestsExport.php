@@ -57,6 +57,9 @@ class GuestsExport implements
             'Kode Kunjungan',
             'Nama Tamu',
             'Pekerjaan',
+            'Tanggal Lahir',
+            'Jenis Kelamin',
+            'Pendidikan Terakhir',
             'No HP',
             'Alamat/Instansi',
             'Jenis Layanan',
@@ -77,6 +80,9 @@ class GuestsExport implements
             $g->kode_kunjungan,
             $g->nama_tamu,
             $g->pekerjaan,
+            $g->tanggal_lahir ? $g->tanggal_lahir->format('Y-m-d') : '-',
+            $g->jenis_kelamin ?? '-',
+            $g->pendidikan_terakhir ?? '-',
             $g->no_hp ? ' ' . $g->no_hp : '', // Leading space to preserve leading zero in Excel
             $g->alamat_instansi,
             $g->jenis_layanan,
@@ -92,7 +98,7 @@ class GuestsExport implements
     public function columnFormats(): array
     {
         return [
-            'F' => NumberFormat::FORMAT_TEXT, // Column F (No HP) formatted as text
+            'I' => NumberFormat::FORMAT_TEXT, // Column I (No HP) formatted as text
         ];
     }
 
@@ -126,12 +132,12 @@ class GuestsExport implements
                 $sheet = $event->sheet->getDelegate();
                 
                 // 1. Add Title Header
-                $sheet->mergeCells('A1:N1');
+                $sheet->mergeCells('A1:Q1');
                 $sheet->setCellValue('A1', 'REKAPITULASI KUNJUNGAN BUKU TAMU DIGITAL');
                 $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(16)->setColor(new \PhpOffice\PhpSpreadsheet\Style\Color('022C22'));
                 $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-                $sheet->mergeCells('A2:N2');
+                $sheet->mergeCells('A2:Q2');
                 $sheet->setCellValue('A2', 'PENGADILAN NEGERI NATUNA KELAS II');
                 $sheet->getStyle('A2')->getFont()->setBold(true)->setSize(12)->setColor(new \PhpOffice\PhpSpreadsheet\Style\Color('4B5563'));
                 $sheet->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
@@ -146,7 +152,7 @@ class GuestsExport implements
                     $period = 'Periode Sampai: ' . $this->tanggalAkhir;
                 }
                 
-                $sheet->mergeCells('A3:N3');
+                $sheet->mergeCells('A3:Q3');
                 $sheet->setCellValue('A3', $period . ($this->jenisLayanan ? ' | Layanan: ' . $this->jenisLayanan : ''));
                 $sheet->getStyle('A3')->getFont()->setItalic(true)->setSize(10)->setColor(new \PhpOffice\PhpSpreadsheet\Style\Color('6B7280'));
                 
@@ -162,7 +168,7 @@ class GuestsExport implements
                     $sheet->getRowDimension($row)->setRowHeight(22);
                     
                     // Alignments
-                    $centerCols = ['A', 'B', 'C', 'F', 'J', 'K', 'M', 'N'];
+                    $centerCols = ['A', 'B', 'C', 'F', 'G', 'H', 'I', 'K', 'M', 'N', 'P', 'Q'];
                     foreach ($centerCols as $col) {
                         $sheet->getStyle($col . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
                     }
@@ -177,7 +183,7 @@ class GuestsExport implements
                         ],
                     ],
                 ];
-                $sheet->getStyle('A4:N' . $highestRow)->applyFromArray($styleArray);
+                $sheet->getStyle('A4:Q' . $highestRow)->applyFromArray($styleArray);
             },
         ];
     }
