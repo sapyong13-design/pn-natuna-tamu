@@ -2382,3 +2382,277 @@ body .landing-corner-right.monitor-clock-wrap .datetime-card.monitor-clock::afte
         text-align: center !important;
     }
 }
+
+
+/* ==========================================
+   MOBILE VIEWS OPTIMIZATION (max-width: 640px)
+   ========================================== */
+@media (max-width: 640px) {
+    /* Brands & Headers */
+    .form-corner-brand {
+        position: static !important;
+        margin: 8px auto !important;
+        padding: 4px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: left !important;
+        width: 100% !important;
+    }
+    .form-corner-brand img {
+        width: 38px !important;
+        height: 38px !important;
+    }
+    .form-corner-brand strong {
+        font-size: 0.82rem !important;
+    }
+    .form-corner-brand span {
+        font-size: 0.68rem !important;
+    }
+    .form-corner-berakhlak {
+        position: static !important;
+        margin: 4px auto 8px !important;
+        width: 120px !important;
+        display: block !important;
+    }
+    .landing-corner-right {
+        margin-bottom: 12px !important;
+        gap: 6px !important;
+    }
+    .datetime-card.monitor-clock-text,
+    .monitor-clock-text {
+        padding: 8px 12px !important;
+        border-radius: 12px !important;
+        width: fit-content !important;
+    }
+    .datetime-card.monitor-clock-text span,
+    .monitor-clock-text span {
+        font-size: 0.78rem !important;
+    }
+    .datetime-card.monitor-clock-text b,
+    .monitor-clock-text b,
+    #current-time {
+        font-size: 1.25rem !important;
+    }
+
+    /* Landing/Beranda Page */
+    .hero-clean-layout {
+        padding: 20px 14px !important;
+        margin: 8px auto !important;
+        border-radius: 20px !important;
+    }
+    .hero-title {
+        font-size: 1.5rem !important;
+    }
+    .hero-description {
+        font-size: 0.82rem !important;
+        margin-top: 6px !important;
+    }
+    .service-grid {
+        gap: 12px !important;
+        padding: 0 4px !important;
+    }
+    .service-card {
+        padding: 16px !important;
+        min-height: auto !important;
+        border-radius: 20px !important;
+    }
+    .service-icon {
+        font-size: 1.85rem !important;
+        margin-bottom: 6px !important;
+    }
+    .service-title {
+        font-size: 1.1rem !important;
+        margin-bottom: 4px !important;
+    }
+    .service-text {
+        font-size: 0.8rem !important;
+        margin-bottom: 10px !important;
+    }
+    .service-actions {
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+    .btn-action {
+        width: 100% !important;
+        padding: 10px 14px !important;
+        font-size: 0.82rem !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+    .service-cta {
+        padding: 10px 14px !important;
+        font-size: 0.82rem !important;
+        box-sizing: border-box !important;
+    }
+    .info-card {
+        padding: 10px 12px !important;
+        font-size: 0.78rem !important;
+        margin: 12px auto !important;
+        border-radius: 12px !important;
+    }
+
+    /* Isi Tamu (Form) Page */
+    .form-hero {
+        padding: 14px !important;
+        margin-top: 8px !important;
+    }
+    .form-hero h1 {
+        font-size: 1.5rem !important;
+    }
+    .form-hero p {
+        font-size: 0.82rem !important;
+    }
+    .form-card {
+        padding: 14px 12px !important;
+        border-radius: 20px !important;
+        margin: 0 4px 20px !important;
+    }
+    .form-section-title {
+        gap: 8px !important;
+    }
+    .form-section-title > span {
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 0.85rem !important;
+        border-radius: 8px !important;
+    }
+    .form-section-title h2 {
+        font-size: 1rem !important;
+    }
+    .form-section-title p {
+        font-size: 0.78rem !important;
+    }
+    .form-grid {
+        gap: 10px !important;
+    }
+    .field span {
+        font-size: 0.8rem !important;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+        padding: 8px 10px !important;
+        font-size: 0.85rem !important;
+        border-radius: 8px !important;
+    }
+    .captcha-box {
+        gap: 6px !important;
+    }
+    .captcha-box strong {
+        font-size: 0.85rem !important;
+    }
+    .captcha-box input {
+        width: 80px !important;
+    }
+    .submit-button {
+        padding: 11px 16px !important;
+        font-size: 0.9rem !important;
+        border-radius: 10px !important;
+    }
+
+    /* Cek Tamu (Monitoring) Page */
+    .monitor-hero {
+        padding: 14px !important;
+        gap: 10px !important;
+    }
+    .monitor-title {
+        font-size: 1.35rem !important;
+    }
+    .monitor-date {
+        font-size: 0.85rem !important;
+    }
+    .monitor-summary {
+        padding: 6px 10px !important;
+    }
+    .monitor-summary strong {
+        font-size: 1.35rem !important;
+    }
+    .monitor-toolbar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        padding: 10px !important;
+    }
+    .monitor-date-filter {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+    .monitor-date-filter label {
+        font-size: 0.82rem !important;
+    }
+    .date-picker-input {
+        width: 100% !important;
+        font-size: 0.82rem !important;
+        padding: 6px !important;
+    }
+    .monitor-sidang-card {
+        padding: 12px !important;
+        margin-bottom: 12px !important;
+        border-radius: 12px !important;
+    }
+    .sidang-title-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+    .sidang-no-perkara {
+        font-size: 0.85rem !important;
+    }
+    .sidang-jenis-perkara {
+        font-size: 0.72rem !important;
+    }
+    .sidang-badge.ruang {
+        font-size: 0.72rem !important;
+        padding: 2px 6px !important;
+    }
+    .sidang-main-info {
+        gap: 10px !important;
+        padding: 10px 0 !important;
+    }
+    .sidang-section-label {
+        font-size: 0.78rem !important;
+    }
+    .sidang-pihak-panel p,
+    .sidang-agenda-panel p {
+        font-size: 0.82rem !important;
+    }
+    .tamu-role-column {
+        padding: 8px !important;
+        border-radius: 10px !important;
+    }
+    .tamu-role-header {
+        font-size: 0.8rem !important;
+        padding-bottom: 4px !important;
+    }
+    .guest-present-item,
+    .guest-absent-item {
+        padding: 5px 6px !important;
+        font-size: 0.78rem !important;
+        border-radius: 6px !important;
+    }
+    .badge-status {
+        width: 14px !important;
+        height: 14px !important;
+        font-size: 0.6rem !important;
+    }
+}
+
+
+/* Fix: Center monitor summary box on mobile */
+@media (max-width: 640px) {
+    .monitor-hero {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    .monitor-summary {
+        margin: 8px auto 0 !important;
+        width: fit-content !important;
+        display: inline-flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
